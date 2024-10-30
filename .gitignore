@@ -39,4 +39,8 @@ TravelSurveyApp.Shared/bin
 TravelSurveyApp.Shared/obj
 TravelSurveyApp.API/obj
 TravelSurveyApp.API/bin
+TravelSurveyApp.Data/obj
+TravelSurveyApp.Data/bin
+TravelSurveyApp.Core/obj
+TravelSurveyApp.Core/bin
 .idea
