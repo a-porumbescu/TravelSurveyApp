@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelSurveyApp.Client", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelSurveyApp.Shared", "TravelSurveyApp.Shared\TravelSurveyApp.Shared.csproj", "{A0885EBF-0BB8-4749-9F9D-273DA4229A8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelSurveyApp.Data", "TravelSurveyApp.Data\TravelSurveyApp.Data.csproj", "{E5200E20-E52E-4478-A4E7-6C989094BAA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelSurveyApp.Core", "TravelSurveyApp.Core\TravelSurveyApp.Core.csproj", "{5569A774-09EB-4E27-B645-37920C9855A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{A0885EBF-0BB8-4749-9F9D-273DA4229A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0885EBF-0BB8-4749-9F9D-273DA4229A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0885EBF-0BB8-4749-9F9D-273DA4229A8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5200E20-E52E-4478-A4E7-6C989094BAA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5200E20-E52E-4478-A4E7-6C989094BAA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5200E20-E52E-4478-A4E7-6C989094BAA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5200E20-E52E-4478-A4E7-6C989094BAA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5569A774-09EB-4E27-B645-37920C9855A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5569A774-09EB-4E27-B645-37920C9855A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5569A774-09EB-4E27-B645-37920C9855A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5569A774-09EB-4E27-B645-37920C9855A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
