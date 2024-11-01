@@ -4,7 +4,7 @@ using TravelSurveyApp.Data.Enums;
 namespace TravelSurveyApp.Data.Models;
 
 [Table("Companies")]
-public class CompanyModel
+public class Company
 {
     public long Id {get; set;}
     public string Name {get; set;}

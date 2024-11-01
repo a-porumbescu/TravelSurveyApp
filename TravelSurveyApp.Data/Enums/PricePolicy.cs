@@ -2,7 +2,7 @@
 
 public enum PricePolicy
 {
-    LowCost,
-    Standart,
-    Premium
+    LowCost = 1,
+    Standart = 2,
+    Premium = 3
 }
