@@ -1,7 +1,9 @@
-﻿using TravelSurveyApp.Data.Enums;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TravelSurveyApp.Data.Enums;
 
 namespace TravelSurveyApp.Data.Models;
 
+[Table("Companies")]
 public class CompanyModel
 {
     public long Id {get; set;}
