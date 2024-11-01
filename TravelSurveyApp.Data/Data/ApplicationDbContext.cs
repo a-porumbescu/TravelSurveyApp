@@ -10,5 +10,5 @@ public class ApplicationDbContext : DbContext
 
     }
     
-    public DbSet<CompanyModel> Companies { get; set; }
+    public DbSet<Company> Companies { get; set; }
 }
