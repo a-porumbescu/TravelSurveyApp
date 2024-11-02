@@ -34,36 +34,26 @@ public class CompanyRepository : ICompanyRepository
 
     public async Task<Company?> UpdateAsync(Company company)
     {
-        var existingCompany = await _context.Companies.FirstOrDefaultAsync(c => c.Id == company.Id);
-
-        if (existingCompany == null)
-        {
-            return null;
-        }
-        
-        existingCompany.Name = company.Name;
-        existingCompany.Description = company.Description;
-        existingCompany.Logo = company.Logo;
-        existingCompany.IsDeleted = company.IsDeleted;
-        existingCompany.DateOfFoundation = company.DateOfFoundation;
-        existingCompany.PricePolicy = company.PricePolicy;
-        
+        _context.Companies.Update(company);
         await _context.SaveChangesAsync();
-        return existingCompany;
+        
+        return company;
     }
 
     public async Task<Company?> DeleteAsync(int id)
     {
-        var existingCompany = await _context.Companies.FirstOrDefaultAsync(c => c.Id == id);
+        
+        var company = await _context.Companies.FirstOrDefaultAsync(c => c.Id == id);
 
-        if (existingCompany == null)
+        if (company == null)
         {
             return null;
         }
-        
-        _context.Companies.Remove(existingCompany);
+
+        company.IsDeleted = true;
+
         await _context.SaveChangesAsync();
-        
-        return existingCompany;
+
+        return company; 
     }
 }
