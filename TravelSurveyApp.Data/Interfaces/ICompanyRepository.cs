@@ -1,6 +1,6 @@
 ﻿using TravelSurveyApp.Data.Models;
 
-namespace TravelSurveyApp.API.Interfaces;
+namespace TravelSurveyApp.Data.Interfaces;
 
 public interface ICompanyRepository
 {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TravelSurveyApp.API.Interfaces;
 using TravelSurveyApp.Data.Data;
+using TravelSurveyApp.Data.Interfaces;
 using TravelSurveyApp.Data.Models;
 
-namespace TravelSurveyApp.API.Repositories;
+namespace TravelSurveyApp.Data.Repositories;
 
 public class CompanyRepository : ICompanyRepository
 {
@@ -13,7 +13,7 @@ public class CompanyRepository : ICompanyRepository
     {
         _context = context;
     }
-    
+
     public async Task<List<Company>> GetAllAsync()
     {
         return await _context.Companies.Where(c => !c.IsDeleted).ToListAsync();
