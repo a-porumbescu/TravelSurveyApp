@@ -40,20 +40,20 @@ public class CompanyRepository : ICompanyRepository
         return company;
     }
 
-    public async Task<Company?> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
         
         var company = await _context.Companies.FirstOrDefaultAsync(c => c.Id == id);
 
         if (company == null)
         {
-            return null;
+            return false;
         }
 
         company.IsDeleted = true;
 
         await _context.SaveChangesAsync();
 
-        return company; 
+        return true; 
     }
 }

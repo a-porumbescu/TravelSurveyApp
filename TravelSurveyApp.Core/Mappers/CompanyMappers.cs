@@ -42,4 +42,16 @@ public static class CompanyMappers
             PricePolicy = companyDTO.PricePolicy
         };
     }
+    
+    public static Company ToCompanyFromCompanyDTO(this UpdateCompanyDTO companyDTO)
+    {
+        return new Company
+        {
+            Name = companyDTO.Name,
+            Description = companyDTO.Description,
+            Logo = companyDTO.Logo,
+            DateOfFoundation = companyDTO.DateOfFoundation,
+            PricePolicy = companyDTO.PricePolicy
+        };
+    }
 }

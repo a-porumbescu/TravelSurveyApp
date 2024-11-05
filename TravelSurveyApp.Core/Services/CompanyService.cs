@@ -14,61 +14,52 @@ public class CompanyService : ICompanyService
     {
         _companyRepository = companyRepository;
     }
-    
+
+
     public async Task<List<CompanyDTO>> GetAllAsync()
     {
-        List<Company> companies = await _companyRepository.GetAllAsync();
-        var result = companies.Select(company  => company.ToCompanyDTO()).ToList();
-        
-        return result;
+        var companies = await _companyRepository.GetAllAsync();
+
+        return companies.Select(c => c.ToCompanyDTO()).ToList();
     }
-    
+
     public async Task<CompanyDTO?> GetByIdAsync(int id)
     {
-        var companies = await _companyRepository.GetByIdAsync(id);
+        var company = await _companyRepository.GetByIdAsync(id);
 
-        return companies?.ToCompanyDTO();
+        return company.ToCompanyDTO();
     }
 
     public async Task<CompanyDTO?> CreateCompanyAsync(CreateCompanyDTO companyDTO)
     {
-        var addedCompany = await _companyRepository.AddAsync(companyDTO.ToCompanyFromCompanyDTO());
+        var company = await _companyRepository.AddAsync(companyDTO.ToCompanyFromCompanyDTO());
         
-        return addedCompany?.ToCompanyDTO();
+        return company.ToCompanyDTO();
     }
 
     public async Task<CompanyDTO?> UpdateCompanyAsync(int id, UpdateCompanyDTO companyDTO)
     {
-        var existingCompany = await _companyRepository.GetByIdAsync(id);
+        var company = await _companyRepository.GetByIdAsync(id);
 
-        if (existingCompany == null)
+        if (company is null)
         {
             return null;
         }
+
+        var updatedCompany = await _companyRepository.UpdateAsync(companyDTO.ToCompanyFromCompanyDTO());
         
-        existingCompany.Name = companyDTO.Name;
-        existingCompany.Description = companyDTO.Description;
-        existingCompany.Logo = companyDTO.Logo;
-        existingCompany.IsDeleted = companyDTO.IsDeleted;
-        existingCompany.DateOfFoundation = companyDTO.DateOfFoundation;
-        existingCompany.PricePolicy = companyDTO.PricePolicy;
-        
-        await _companyRepository.UpdateAsync(existingCompany);
-        
-        return existingCompany.ToCompanyDTO();
+        return updatedCompany?.ToCompanyDTO();
     }
 
-    public async Task<CompanyDTO?> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
-        var company = await _companyRepository.DeleteAsync(id);
+        var company = await _companyRepository.GetByIdAsync(id);
 
-        if (company == null)
+        if (company is null)
         {
-            return null;
+            return false;
         }
 
-        company.IsDeleted = true;
-
-        return company.ToCompanyDTO();
+        return await _companyRepository.DeleteAsync(id);
     }
 }
