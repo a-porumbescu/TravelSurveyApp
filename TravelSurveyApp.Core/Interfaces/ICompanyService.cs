@@ -1,5 +1,4 @@
-﻿using TravelSurveyApp.Data.Models;
-using TravelSurveyApp.Shared.DTOs.Company;
+﻿using TravelSurveyApp.Shared.DTOs.Company;
 
 namespace TravelSurveyApp.Core.Interfaces;
 
