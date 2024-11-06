@@ -13,15 +13,15 @@ public class CompanyRepository : ICompanyRepository
     {
         _context = context;
     }
-
+    
     public async Task<List<Company>> GetAllAsync()
     {
-        return await _context.Companies.Where(c => !c.IsDeleted).ToListAsync();
+        return await _context.Companies.AsNoTracking().Where(c => !c.IsDeleted).ToListAsync();
     }
 
     public async Task<Company?> GetByIdAsync(int id)
     {
-        return await _context.Companies.FirstOrDefaultAsync(c => c.Id == id);
+        return await _context.Companies.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
     }
 
     public async Task<Company> AddAsync(Company companyModel)
@@ -31,7 +31,7 @@ public class CompanyRepository : ICompanyRepository
 
         return companyModel;
     }
-
+    
     public async Task<Company?> UpdateAsync(Company company)
     {
         _context.Companies.Update(company);

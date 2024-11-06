@@ -39,14 +39,16 @@ public class CompanyService : ICompanyService
 
     public async Task<CompanyDTO?> UpdateCompanyAsync(int id, UpdateCompanyDTO companyDTO)
     {
-        var company = await _companyRepository.GetByIdAsync(id);
-
-        if (company is null)
+        var companyFromDb = await _companyRepository.GetByIdAsync(id);
+        
+        if (companyFromDb is null)
         {
             return null;
         }
 
-        var updatedCompany = await _companyRepository.UpdateAsync(companyDTO.ToCompanyFromCompanyDTO());
+        var company = companyDTO.ToCompanyFromCompanyDTO();
+        company.Id = id; 
+        var updatedCompany = await _companyRepository.UpdateAsync(company);
         
         return updatedCompany?.ToCompanyDTO();
     }
