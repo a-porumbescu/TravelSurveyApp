@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TravelSurveyApp.API.Interfaces;
 using TravelSurveyApp.Data.Data;
+using TravelSurveyApp.Data.Interfaces;
 using TravelSurveyApp.Data.Models;
 
-namespace TravelSurveyApp.API.Repositories;
+namespace TravelSurveyApp.Data.Repositories;
 
 public class CompanyRepository : ICompanyRepository
 {
@@ -13,7 +13,7 @@ public class CompanyRepository : ICompanyRepository
     {
         _context = context;
     }
-    
+
     public async Task<List<Company>> GetAllAsync()
     {
         return await _context.Companies.Where(c => !c.IsDeleted).ToListAsync();
@@ -40,20 +40,20 @@ public class CompanyRepository : ICompanyRepository
         return company;
     }
 
-    public async Task<Company?> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
         
         var company = await _context.Companies.FirstOrDefaultAsync(c => c.Id == id);
 
         if (company == null)
         {
-            return null;
+            return false;
         }
 
         company.IsDeleted = true;
 
         await _context.SaveChangesAsync();
 
-        return company; 
+        return true; 
     }
 }

@@ -13,4 +13,9 @@
       </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\TravelSurveyApp.Data\TravelSurveyApp.Data.csproj" />
+      <ProjectReference Include="..\TravelSurveyApp.Shared\TravelSurveyApp.Shared.csproj" />
+    </ItemGroup>
+
 </Project>
