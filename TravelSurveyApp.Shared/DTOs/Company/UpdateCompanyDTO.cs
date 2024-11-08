@@ -13,8 +13,6 @@ public class UpdateCompanyDTO
     public string Description { get; set; }
     [Required]
     public string Logo {get; set;}
-    [Required]
-    public bool IsDeleted {get; set;} = false;
     [Required] 
     public DateTime DateOfFoundation { get; set; }
     [Required]
