@@ -16,7 +16,7 @@ public class AnswerAnalyzeController : ControllerBase
     }
 
     [HttpPost("get_answer")]
-    public async Task<IActionResult> GetAnswer([FromBody] string userResponse)
+    public async Task<IActionResult> GetAnswer([FromBody]string userResponse)
     {
         try
         {

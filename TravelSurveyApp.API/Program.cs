@@ -15,6 +15,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("TravelSurveyApp",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:7037") // Blazor client URL
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -26,6 +37,8 @@ builder.Services.AddScoped<IChatGPTService, ChatGPTService>();
 
 var app = builder.Build();
 
+app.UseCors("TravelSurveyApp");
+
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -34,7 +47,7 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
         context.Database.Migrate();
-        await context.Seed(services);
+        await context.Seed();
     }
     catch (Exception ex)
     {

@@ -26,7 +26,7 @@ public class ChatGPTService : IChatGPTService
     public async Task<string?> GetResponseAsync(string userResponse)
     {
         var companies = await _companyService.GetAllAsync();
-        var companiesJson = JsonConvert.SerializeObject(_companyService.GetAllAsync().Result);
+        var companiesJson = JsonConvert.SerializeObject(companies);
         var fullModelInstruction = ModelInstruction + companiesJson;
         
         var messages = new List<ChatMessage>

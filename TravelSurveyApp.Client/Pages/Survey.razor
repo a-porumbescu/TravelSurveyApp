@@ -1,0 +1,139 @@
+﻿@page "/survey"
+@using System.Text.Json
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<PageTitle>Travel Survey</PageTitle>
+
+<h3>Путешествия - Опрос</h3>
+
+@if (questions == null)
+{
+    <p>Загрузка вопросов...</p>
+}
+else if (isSubmitting)
+{
+    <p>Отправка ответов, пожалуйста, подождите...</p>
+}
+else if (!string.IsNullOrEmpty(serverResponse))
+{
+    <div class="server-response">
+        <h4>Результат анализа:</h4>
+        @((MarkupString)FormatServerResponse(serverResponse))
+        
+        <!-- Кнопка для возврата к опросу -->
+        <button @onclick="NavigateToSurvey">Вернуться к опросу</button>
+    </div>
+}
+else
+{
+    <EditForm Model="this">
+        @foreach (var question in questions)
+        {
+            <div class="question">
+                <h4>@question.QuestionText</h4>
+                @foreach (var option in question.Options)
+                {
+                    <label>
+                        <input type="radio" name="@question.QuestionText" value="@option"
+                               @onchange="() => HandleOptionChange(question.QuestionText, option)"/>
+                        @option
+                    </label>
+                    <br/>
+                }
+            </div>
+            <hr/>
+        }
+
+        <button @onclick="SubmitAnswers">Отправить ответы</button>
+    </EditForm>
+}
+
+@code {
+    private List<Question>? questions;
+    private Dictionary<string, string> userResponses = new Dictionary<string, string>();
+    private bool isSubmitting = false;
+    private string? serverResponse;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var questionList = await Http.GetFromJsonAsync<QuestionList>("data/questions.json");
+        questions = questionList?.Questions;
+    }
+
+    private void HandleOptionChange(string question, string answer)
+    {
+        userResponses[question] = answer;
+    }
+
+    private async Task SubmitAnswers()
+    {
+        isSubmitting = true;
+        serverResponse = null;
+
+        // Convert userResponse to JSON format
+        string userResponse = string.Join("; ", userResponses.Select(kv => $"{kv.Key}: {kv.Value}"));
+        var jsonContent = JsonSerializer.Serialize(userResponse);
+        var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+
+        try
+        {
+            var response = await Http.PostAsync("https://localhost:7034/api/analyze/get_answer", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                serverResponse = await response.Content.ReadAsStringAsync();
+                // questions = null; // Clear questions after submission
+            }
+            else
+            {
+                serverResponse = "Ошибка при отправке ответов.";
+            }
+        }
+        catch (Exception ex)
+        {
+            serverResponse = $"Произошла ошибка: {ex.Message}";
+        }
+        finally
+        {
+            isSubmitting = false;
+        }
+    }
+
+    // Метод для преобразования текста с ссылкой и названием компании в HTML
+    private string FormatServerResponse(string response)
+    {
+        // Регулярное выражение для поиска ссылки в тексте
+        string pattern = @"\[(.*?)\]\((https?://[^\s]+)\)"; // Ищем [CompanyName](http://link)
+        
+        // Преобразование текста, заменяя URL на HTML-ссылку с текстом названия компании
+        string formattedResponse = System.Text.RegularExpressions.Regex.Replace(response, pattern, match =>
+        {
+            string companyName = match.Groups[1].Value; // Извлекаем название компании из скобок
+            string url = match.Groups[2].Value; // Извлекаем ссылку из круглых скобок
+            return $"<a href=\"{url}\" target=\"_blank\">{companyName}</a>"; // Возвращаем ссылку в HTML-формате
+        });
+
+        return formattedResponse;
+    }
+
+    private async Task NavigateToSurvey()
+    {
+        serverResponse = null;
+        userResponses = new Dictionary<string, string>();
+        var questionList = await Http.GetFromJsonAsync<QuestionList>("data/questions.json");
+        questions = questionList?.Questions;
+    }
+
+    // Модели для вопросов и вариантов
+    public class Question
+    {
+        public string QuestionText { get; set; } = string.Empty;
+        public List<string> Options { get; set; } = new();
+    }
+
+    public class QuestionList
+    {
+        public List<Question> Questions { get; set; } = new();
+    }
+}

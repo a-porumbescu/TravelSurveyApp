@@ -7,7 +7,7 @@ namespace TravelSurveyApp.API.Extensions;
 
 public static class SeedDatabase
 {
-    public static async Task Seed(this ApplicationDbContext context, IServiceProvider applicationServices)
+    public static async Task Seed(this ApplicationDbContext context)
     {
         if (!await context.Companies.AnyAsync())
         {
