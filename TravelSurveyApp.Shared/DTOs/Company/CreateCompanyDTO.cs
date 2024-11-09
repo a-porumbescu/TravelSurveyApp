@@ -13,6 +13,8 @@ public class CreateCompanyDTO
     [MaxLength(50, ErrorMessage = "Description cannot be longer than 50 characters.")]
     public string Description {get; set;}
     public string Logo {get; set;}
+    public string Link { get; set; }
+    public string Keywords { get; set; }
     [Required] 
     public DateTime DateOfFoundation { get; set; }
     [Required]

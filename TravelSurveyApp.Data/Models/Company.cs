@@ -11,6 +11,8 @@ public class Company
     public string Description {get; set;}
     public string Logo {get; set;}
     public bool IsDeleted {get; set;} = false;
+    public string Link { get; set; }
+    public string Keywords { get; set; }
     public DateTime DateOfFoundation {get; set;}
     public PricePolicy PricePolicy {get; set;}
 }
