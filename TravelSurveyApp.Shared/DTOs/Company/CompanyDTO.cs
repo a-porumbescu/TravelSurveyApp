@@ -1,6 +1,4 @@
-﻿using TravelSurveyApp.Data.Enums;
-
-namespace TravelSurveyApp.Shared.DTOs.Company;
+﻿namespace TravelSurveyApp.Shared.DTOs.Company;
 
 public class CompanyDTO
 {

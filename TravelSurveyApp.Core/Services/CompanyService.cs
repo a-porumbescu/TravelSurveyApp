@@ -1,7 +1,6 @@
 ﻿using TravelSurveyApp.Core.Interfaces;
 using TravelSurveyApp.Core.Mappers;
 using TravelSurveyApp.Data.Interfaces;
-using TravelSurveyApp.Data.Models;
 using TravelSurveyApp.Shared.DTOs.Company;
 
 namespace TravelSurveyApp.Core.Services;
@@ -14,8 +13,7 @@ public class CompanyService : ICompanyService
     {
         _companyRepository = companyRepository;
     }
-
-
+    
     public async Task<List<CompanyDTO>> GetAllAsync()
     {
         var companies = await _companyRepository.GetAllAsync();

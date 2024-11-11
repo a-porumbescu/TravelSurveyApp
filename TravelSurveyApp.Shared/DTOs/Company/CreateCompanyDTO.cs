@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
 using TravelSurveyApp.Data.Enums;
 
 namespace TravelSurveyApp.Shared.DTOs.Company;
