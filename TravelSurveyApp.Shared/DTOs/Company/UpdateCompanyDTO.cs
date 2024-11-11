@@ -11,7 +11,8 @@ public class UpdateCompanyDTO
     [Required]
     [MaxLength(50, ErrorMessage = "Description cannot be longer than 50 characters.")]
     public string Description { get; set; }
-    [Required]
+    public string Link { get; set; }
+    public string Keywords { get; set; }
     public string Logo {get; set;}
     [Required] 
     public DateTime DateOfFoundation { get; set; }

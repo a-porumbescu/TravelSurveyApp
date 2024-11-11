@@ -44,3 +44,5 @@ TravelSurveyApp.Data/bin
 TravelSurveyApp.Core/obj
 TravelSurveyApp.Core/bin
 .idea
+
+TravelSurveyApp.API/appsettings.Development.json
