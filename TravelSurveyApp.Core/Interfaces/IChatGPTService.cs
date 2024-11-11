@@ -1,6 +1,4 @@
-﻿using TravelSurveyApp.Shared.DTOs.Company;
-
-namespace TravelSurveyApp.Core.Interfaces;
+﻿namespace TravelSurveyApp.Core.Interfaces;
 
 public interface IChatGPTService
 {

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TravelSurveyApp.Core.Interfaces;
-using TravelSurveyApp.Shared.DTOs.Company;
 
 namespace TravelSurveyApp.API.Controllers;
 

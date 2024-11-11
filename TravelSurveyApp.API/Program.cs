@@ -1,6 +1,5 @@
 using TravelSurveyApp.Data.Data;
-using TravelSurveyApp.Shared.Models;
-using Microsoft.EntityFrameworkCore;using TravelSurveyApp.API.Controllers;
+using Microsoft.EntityFrameworkCore;
 using TravelSurveyApp.API.Extensions;
 using TravelSurveyApp.Core.Interfaces;
 using TravelSurveyApp.Core.Services;
